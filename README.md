@@ -1,9 +1,19 @@
 # Korean Study Notebook
 
-A colorful starter version of Nemoing's Korean study notebook.
+A colorful version of Nemoing's Korean study notebook that saves
+its own entries in the browser.
 
-Open `index.html` in a browser to see the chapters and entries. No
-build step is needed for this starter page.
+Open `index.html` in a browser to use it. No build step is needed.
+
+## How saving works
+
+- Entries, chapters, and "known" marks are saved in the browser's
+  local storage, on that device and in that browser only.
+- They are **not** synced to the live notebook in Muse, to GitHub,
+  or to other devices.
+- Use **Export JSON** in the page to download a copy of your saved
+  entries. Use **Reset to snapshot** to go back to the chapters and
+  entries included with this page.
 
 ## Chapters in this snapshot
 
@@ -17,22 +27,22 @@ build step is needed for this starter page.
   ㅛ yo, ㅠ yu, the y-sound versions of ㅏ ㅓ ㅗ ㅜ. 5 entries.
 
 Total: 3 chapters, 13 entries. Snapshot taken from the live
-Korean Study Notebook in Muse on 2026-10-28.
+Korean Study Notebook in Muse on 2026-10-28. The live notebook
+in Muse remains the place where new chapters are added, one
+chapter per side chat; a new snapshot is needed for new Muse
+chapters to appear here as starting content.
 
-## Notes
+## What you can do in the page
 
-- This is a static snapshot. It does not sync back to the live
-  notebook in Muse. New chapters added in Muse side chats will need
-  a new snapshot to appear here.
-- The live notebook in Muse remains the place where new entries
-  and chapters are added, one chapter per side chat.
-- `index.html` uses only local CSS and JavaScript. The chapter
-  filter buttons and "mark known" toggles save only in the
-  browser that opened the page.
+- Filter by chapter and search entries.
+- Mark entries as known (saved in the browser).
+- Add a new entry to any chapter, and add a new chapter.
+- Delete an entry you added or no longer want.
+- Export your saved entries as JSON, or reset to the snapshot.
 
 ## Next ideas
 
 - Add consonants and combined vowels as new chapters.
-- Turn the snapshot into a small web app with its own saved
-  entries, instead of a static page.
 - Add audio, tracing practice, or quizzes for each vowel.
+- Move to a small hosted web app with a shared database if entries
+  ever need to sync across devices.
