@@ -2,72 +2,157 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ff6b6b">
+<meta name="description" content="Korean Study Notebook — colorful chapters, one per side chat.">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Korean Notebook">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%96%3C/text%3E%3C/svg%3E">
 <title>Korean Study Notebook</title>
 <style>
   * { box-sizing: border-box; }
-  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #222; background: linear-gradient(180deg, #fff3c4 0%, #ffe3ec 35%, #dbeafe 70%, #dcfce7 100%); }
-  header { padding: 36px 20px 24px; text-align: center; background: linear-gradient(90deg, #ff6b6b, #ff9f1c, #2a9d8f, #4361ee); color: white; }
-  header h1 { margin: 0 0 8px; font-size: 2.4rem; }
-  header p { margin: 4px 0; font-size: 1.05rem; }
-  .sun-moon { font-size: 2rem; letter-spacing: .4em; }
-  .toolbar { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 18px 16px 4px; align-items: center; }
-  .toolbar button, .toolbar input, .toolbar select { border: 0; border-radius: 999px; padding: 10px 16px; font-size: 1rem; }
-  .toolbar button { font-weight: 700; cursor: pointer; background: white; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
-  .toolbar button.active { background: #222; color: white; }
-  .toolbar input { min-width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,.12); }
-  main { max-width: 920px; margin: 0 auto; padding: 12px 16px 40px; }
-  .counts { text-align: center; font-weight: 700; }
-  .chapter { border-radius: 20px; padding: 22px; margin: 22px 0; background: white; box-shadow: 0 6px 24px rgba(0,0,0,.12); border-top: 12px solid #999; }
-  .chapter.ocean { border-top-color: #2a7fff; }
-  .chapter.coral { border-top-color: #ff6b6b; }
-  .chapter.sun { border-top-color: #ffb703; }
-  .chapter.leaf { border-top-color: #22c55e; }
-  .chapter.plum { border-top-color: #a855f7; }
-  .chapter.teal { border-top-color: #14b8a6; }
-  .chapter h2 { margin-top: 0; font-size: 1.7rem; }
-  .chapter .desc { color: #444; line-height: 1.5; }
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 18px; }
-  .card { border-radius: 16px; padding: 18px; background: #fff8e1; border: 3px solid #ffd166; }
-  .card.blue { background: #e3f2fd; border-color: #64b5f6; }
-  .card.pink { background: #fce4ec; border-color: #f48fb1; }
-  .card.green { background: #e8f5e9; border-color: #81c784; }
-  .card .big { font-size: 3.2rem; line-height: 1; margin: 0; }
-  .card h3 { margin: 10px 0 6px; font-size: 1.25rem; }
-  .card p { margin: 6px 0; line-height: 1.5; white-space: pre-wrap; }
-  .tag { display: inline-block; background: #222; color: white; border-radius: 999px; padding: 3px 10px; font-size: .8rem; }
-  .card button, .forms button { border: 2px solid #222; border-radius: 999px; padding: 6px 12px; cursor: pointer; font-weight: 700; margin: 6px 6px 0 0; background: white; }
+  :root { color-scheme: light; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #232323; background: #fff8ef; padding-bottom: 96px; }
+  button, input, select, textarea { font: inherit; }
+  button { cursor: pointer; }
+  .appbar { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: 12px; padding: calc(env(safe-area-inset-top, 0px) + 10px) 16px 10px; background: rgba(255,255,255,.9); backdrop-filter: blur(12px); border-bottom: 1px solid #ffe0cc; }
+  .appbar .logo { width: 44px; height: 44px; flex: 0 0 auto; border-radius: 14px; display: grid; place-items: center; color: #fff; font-size: 1.6rem; font-weight: 800; background: linear-gradient(135deg, #ff6b6b, #4361ee); box-shadow: 0 4px 12px rgba(67,97,238,.3); }
+  .appbar .who { flex: 1; min-width: 0; line-height: 1.25; }
+  .appbar .who strong { font-size: 1.05rem; }
+  .appbar .who small { color: #666; }
+  .appbar-pill { background: #222; color: #fff; border-radius: 999px; padding: 7px 12px; font-size: .85rem; font-weight: 700; white-space: nowrap; }
+  .hero { padding: 26px 20px 30px; text-align: left; color: #fff; background: linear-gradient(135deg, #ff6b6b 0%, #ff9f1c 34%, #e94f8a 64%, #4361ee 100%); border-radius: 0 0 28px 28px; box-shadow: 0 10px 30px rgba(233,79,138,.25); }
+  .hero .skyline { font-size: 2.4rem; letter-spacing: .25em; }
+  .hero h1 { margin: 8px 0 6px; font-size: 2.1rem; line-height: 1.1; }
+  .hero p { margin: 6px 0; line-height: 1.5; }
+  .hero .searchrow { margin-top: 16px; }
+  .hero .searchrow input { width: 100%; border: 0; border-radius: 999px; padding: 14px 18px; font-size: 1.05rem; box-shadow: 0 4px 16px rgba(0,0,0,.18); }
+  .stats { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .stat { background: rgba(255,255,255,.22); border: 1px solid rgba(255,255,255,.4); border-radius: 999px; padding: 7px 12px; font-weight: 700; font-size: .92rem; }
+  .hero-note { font-size: .9rem; opacity: .95; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 16px; }
+  .chapters-head h2, .section-title { font-size: 1.45rem; margin: 22px 0 4px; }
+  .chapters-head p { color: #555; margin: 0 0 6px; line-height: 1.5; }
+  .chapter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 14px; }
+  .chapter-card { background: #fff; border: 3px solid transparent; border-radius: 22px; overflow: hidden; padding: 0; text-align: left; box-shadow: 0 8px 24px rgba(0,0,0,.1); cursor: pointer; }
+  .chapter-card.active { border-color: #222; }
+  .chapter-card .cover { height: 112px; position: relative; display: flex; align-items: flex-end; padding: 12px 14px; font-size: 2.9rem; color: #fff; }
+  .cover-seoul { background: linear-gradient(135deg, #4361ee, #7ab8ff 55%, #ffd166); }
+  .cover-palace { background: linear-gradient(135deg, #c0392b, #ff6b6b 55%, #ffb703); }
+  .cover-blossom { background: linear-gradient(135deg, #e94f8a, #ffb3d1 60%, #ffd166); }
+  .cover-market { background: linear-gradient(135deg, #ff7a18, #ffb703 60%, #2a9d8f); }
+  .cover .cover-label { position: absolute; top: 10px; right: 12px; background: rgba(0,0,0,.28); color: #fff; border-radius: 999px; padding: 4px 10px; font-size: .78rem; font-weight: 700; }
+  .chapter-card .card-body { padding: 14px 16px 16px; }
+  .chapter-card h3 { margin: 0 0 6px; font-size: 1.25rem; }
+  .chapter-card .desc { color: #555; line-height: 1.5; margin: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .chapter-card .meta { margin-top: 12px; font-weight: 700; font-size: .92rem; }
+  .progress { height: 9px; background: #eee; border-radius: 999px; overflow: hidden; margin-top: 8px; }
+  .progress i { display: block; height: 100%; background: linear-gradient(90deg, #22c55e, #a3e635); }
+  .toolbar { max-width: 980px; margin: 20px auto 0; padding: 0 16px; display: grid; gap: 10px; }
+  .filter-row, .kind-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { border: 2px solid #222; background: #fff; border-radius: 999px; padding: 9px 14px; font-weight: 700; }
+  .chip.active { background: #222; color: #fff; }
+  .chip.kind-vocabulary.active { background: #4361ee; border-color: #4361ee; }
+  .chip.kind-note.active { background: #d97706; border-color: #d97706; }
+  .chip.kind-grammar.active { background: #a855f7; border-color: #a855f7; }
+  .chip.kind-phrase.active { background: #0d9488; border-color: #0d9488; }
+  .tool-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tool-actions button { border: 2px solid #222; background: #fff; border-radius: 999px; padding: 9px 14px; font-weight: 700; }
+  main { max-width: 980px; margin: 0 auto; padding: 8px 16px 12px; }
+  .chapter { border-radius: 22px; padding: 0 22px 22px; margin: 22px 0; background: #fff; box-shadow: 0 8px 24px rgba(0,0,0,.1); overflow: hidden; }
+  .chapter-banner { margin: 0 -22px 18px; padding: 20px 22px; color: #fff; }
+  .banner-ocean { background: linear-gradient(90deg, #2a7fff, #4361ee); }
+  .banner-coral { background: linear-gradient(90deg, #ff6b6b, #ff9f1c); }
+  .banner-sun { background: linear-gradient(90deg, #f59e0b, #ffb703); }
+  .banner-leaf { background: linear-gradient(90deg, #16a34a, #22c55e); }
+  .banner-plum { background: linear-gradient(90deg, #9333ea, #a855f7); }
+  .banner-teal { background: linear-gradient(90deg, #0d9488, #14b8a6); }
+  .chapter-banner h2 { margin: 0 0 6px; font-size: 1.65rem; }
+  .chapter-banner .desc { color: rgba(255,255,255,.95); line-height: 1.5; margin: 0; }
+  .chapter-banner .coverline { font-size: 1.8rem; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; margin-top: 16px; }
+  .card { border-radius: 18px; padding: 0 0 16px; background: #fff; border: 2px solid #eee; overflow: hidden; text-align: left; box-shadow: 0 4px 16px rgba(0,0,0,.07); }
+  .card-banner { height: 58px; display: flex; align-items: center; gap: 10px; padding: 0 16px; color: #fff; font-weight: 800; font-size: 1.05rem; }
+  .kind-vocabulary { background: linear-gradient(90deg, #4361ee, #7ab8ff); }
+  .kind-note { background: linear-gradient(90deg, #d97706, #ffb703); }
+  .kind-grammar { background: linear-gradient(90deg, #9333ea, #c084fc); }
+  .kind-phrase { background: linear-gradient(90deg, #0d9488, #2dd4bf); }
+  .card .pad { padding: 0 16px; }
+  .card .big { font-size: 3rem; line-height: 1; margin: 14px 0 6px; }
+  .card h3 { margin: 8px 0 6px; font-size: 1.2rem; }
+  .card p { margin: 6px 0; line-height: 1.55; white-space: pre-wrap; }
+  .tag { display: inline-block; background: #222; color: #fff; border-radius: 999px; padding: 3px 10px; font-size: .78rem; font-weight: 700; }
+  .tag.topic { background: #fff3c4; color: #7c2d12; border: 1px solid #fcd34d; }
+  .card button, .forms button, .note button { border: 2px solid #222; border-radius: 999px; padding: 8px 13px; font-weight: 700; margin: 8px 6px 0 0; background: #fff; min-height: 42px; }
   .card.is-known { outline: 4px solid #22c55e; }
-  .note { background: #fffde7; border-left: 8px solid #ffb703; padding: 16px 18px; border-radius: 12px; line-height: 1.6; white-space: pre-wrap; }
-  .note h3 { margin-top: 0; }
-  .forms { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; margin-top: 22px; }
-  .forms form { background: white; border-radius: 18px; padding: 20px; box-shadow: 0 6px 24px rgba(0,0,0,.12); border-top: 10px solid #a855f7; }
+  .note { background: #fffde7; border-left: 8px solid #ffb703; padding: 0 0 16px; border-radius: 16px; line-height: 1.6; overflow: hidden; margin-top: 16px; }
+  .note .pad { padding: 0 18px; }
+  .note h3 { margin: 14px 0 6px; }
+  .note p { white-space: pre-wrap; }
+  .forms { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; margin: 22px auto 0; max-width: 980px; padding: 0 16px; }
+  .forms form { background: #fff; border-radius: 20px; padding: 20px; box-shadow: 0 8px 24px rgba(0,0,0,.1); border-top: 10px solid #a855f7; }
   .forms form:nth-child(2) { border-top-color: #14b8a6; }
   .forms label { display: block; font-weight: 700; margin: 10px 0 4px; }
-  .forms input, .forms select, .forms textarea { width: 100%; padding: 9px 11px; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem; }
+  .forms input, .forms select, .forms textarea { width: 100%; padding: 11px 12px; border: 2px solid #ddd; border-radius: 12px; font-size: 1rem; background: #fff; }
   .forms textarea { min-height: 80px; }
-  footer { text-align: center; padding: 0 16px 36px; color: #444; }
+  footer { text-align: center; padding: 8px 16px 12px; color: #555; max-width: 980px; margin: 0 auto; }
   .hidden { display: none !important; }
-  .empty { text-align: center; background: white; border-radius: 16px; padding: 24px; }
+  .empty { text-align: center; background: #fff; border-radius: 18px; padding: 24px; box-shadow: 0 4px 16px rgba(0,0,0,.07); }
+  .bottomnav { position: fixed; left: 50%; transform: translateX(-50%); bottom: 0; z-index: 60; width: min(980px, 100%); display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; background: rgba(255,255,255,.96); backdrop-filter: blur(12px); border-top: 1px solid #ffe0cc; padding: 8px 10px calc(env(safe-area-inset-bottom, 0px) + 10px); }
+  .bottomnav button { border: 0; background: transparent; border-radius: 14px; padding: 8px 4px; font-weight: 700; display: grid; justify-items: center; gap: 2px; font-size: .85rem; }
+  .bottomnav button .ico { font-size: 1.35rem; }
+  .bottomnav button.active { background: #fff3c4; }
+  .sheet-backdrop { position: fixed; inset: 0; z-index: 80; background: rgba(0,0,0,.45); display: flex; align-items: flex-end; justify-content: center; padding: 16px; }
+  .sheet { background: #fff; border-radius: 24px 24px 18px 18px; width: min(640px, 100%); max-height: 86vh; overflow: auto; padding: 18px 20px calc(env(safe-area-inset-bottom, 0px) + 20px); box-shadow: 0 20px 60px rgba(0,0,0,.3); }
+  .sheet .sheet-close { float: right; border: 2px solid #222; background: #fff; border-radius: 999px; padding: 8px 13px; font-weight: 700; }
+  .sheet .big { font-size: 3.4rem; margin: 10px 0 4px; line-height: 1; }
+  .sheet p { line-height: 1.6; white-space: pre-wrap; }
+  @media (min-width: 700px) { .sheet-backdrop { align-items: center; } .sheet { border-radius: 24px; } }
 </style>
 </head>
 <body>
-<header>
-  <div class="sun-moon" aria-hidden="true">☀️ 🌙</div>
+<div class="appbar">
+  <div class="logo" aria-hidden="true">ㅎ</div>
+  <div class="who"><strong>Korean Study Notebook</strong><br><small>한국어 공부 · one chapter per side chat</small></div>
+  <span class="appbar-pill" id="countsTop">3 chapters</span>
+</div>
+<header class="hero">
+  <div class="skyline" aria-hidden="true">🏙️ 🌸 🏯 ☀️</div>
   <h1>Korean Study Notebook</h1>
-  <p>한국어 공부 — colorful chapters, one per side chat</p>
-  <p id="counts">Loading…</p>
-  <p>Entries you add here are saved in this browser only.</p>
+  <p>Colorful chapters, big Hangul, and your own notes — like the notebook in Muse.</p>
+  <div class="searchrow"><input id="search" type="search" placeholder="Search Korean, title, or meaning…" aria-label="Search entries"></div>
+  <div class="stats"><span class="stat" id="counts">Loading…</span><span class="stat" id="statProgress">0 known</span></div>
+  <p class="hero-note">Entries you add here are saved in this browser only.</p>
 </header>
 
+<section class="wrap chapters-head" id="chaptersSection" aria-label="Chapters">
+  <h2>Chapters</h2>
+  <p>Tap a chapter card to open it, just like in the notebook app.</p>
+  <div id="chapterCards" class="chapter-grid"></div>
+</section>
+
 <div class="toolbar" aria-label="Filter and search">
-  <button class="active" data-filter="all" type="button">All chapters</button>
-  <button data-filter="essence" type="button">Essence of Hangul</button>
-  <button data-filter="vowels1" type="button">Simple Vowels 1</button>
-  <button data-filter="vowels2" type="button">Simple Vowels 2</button>
-  <input id="search" type="search" placeholder="Search Korean, title, or meaning…" aria-label="Search entries">
-  <button id="exportBtn" type="button">Export JSON</button>
-  <button id="resetBtn" type="button">Reset to snapshot</button>
+  <div class="filter-row" id="chapterFilters">
+    <button class="chip active" data-filter="all" type="button">All chapters</button>
+    <button class="chip" data-filter="essence" type="button">Essence of Hangul</button>
+    <button class="chip" data-filter="vowels1" type="button">Simple Vowels 1</button>
+    <button class="chip" data-filter="vowels2" type="button">Simple Vowels 2</button>
+  </div>
+  <div class="kind-row" id="kindFilters">
+    <button class="chip active" data-kind="all" type="button">All kinds</button>
+    <button class="chip kind-vocabulary" data-kind="vocabulary" type="button">Vocabulary</button>
+    <button class="chip kind-note" data-kind="note" type="button">Notes</button>
+    <button class="chip kind-grammar" data-kind="grammar" type="button">Grammar</button>
+    <button class="chip kind-phrase" data-kind="phrase" type="button">Phrases</button>
+    <button class="chip" id="knownToggle" type="button">Known only</button>
+  </div>
+  <div class="tool-actions">
+    <button id="exportBtn" type="button">Export JSON</button>
+    <button id="resetBtn" type="button">Reset to snapshot</button>
+  </div>
 </div>
 
 <main id="app"></main>
@@ -99,6 +184,8 @@
     <textarea id="chapterDesc" placeholder="What is this chapter about?"></textarea>
     <label for="chapterColor">Color</label>
     <select id="chapterColor"><option value="ocean">Ocean blue</option><option value="coral">Coral</option><option value="sun">Sun yellow</option><option value="leaf">Leaf green</option><option value="plum">Plum purple</option><option value="teal">Teal</option></select>
+    <label for="chapterCover">Cover picture</label>
+    <select id="chapterCover"><option value="seoul">Seoul skyline</option><option value="palace">Palace gate</option><option value="blossom">Cherry blossom</option><option value="market">Market stall</option></select>
     <button type="submit">Save chapter in this browser</button>
     <p>New chapters appear in the filter buttons after you add them. Refreshing the page keeps them, because they are saved in this browser.</p>
   </form>
@@ -108,9 +195,7 @@
   <p>Snapshot from the live Korean Study Notebook in Muse (2026-10-28). Changes here do not sync back to Muse or GitHub.</p>
 </footer>
 
-<script id="seed-data" type="application/json">
-{"chapters":[{"color":"ocean","description":"Sejong the Great and Hunminjeongeum (훈민정음) — the three vowel elements Sky (·), Earth (—), and Human ( | ), and Yang light vowels vs Yin dark vowels.","id":"essence","title":"Essence of Hangul"},{"color":"coral","description":"The 10 simple vowels and 14 simple consonants make up Hangul's 24 basic letters. This chapter covers the first six simple vowels: ㅏ a, ㅓ eo, ㅗ o, ㅜ u, ㅡ eu, and ㅣ i — their sounds, mouth shapes, and stroke order.","id":"vowels1","title":"Simple Vowels 1"},{"color":"sun","description":"The final four simple vowels: ㅑ ya, ㅕ yeo, ㅛ yo, and ㅠ yu. They look like ㅏ ㅓ ㅗ ㅜ, but begin with a y sound — a short, soft ㅣ gliding into the base vowel. Includes their sounds, how to make them, and stroke order.","id":"vowels2","title":"Simple Vowels 2"}],"entries":[{"body":"Sejong the Great succeeded in creating what was known in his time as Hunminjeongeum (훈민정음), meaning \"the proper sound for the instruction of the people.\"\n\nModern Hangul includes both vowels and consonants. Vowels start from three basic elements based on the philosophical concept of Yin and Yang:\n\n- Sky (·) — Yang: the dot, the sun in the sky\n- Earth (—) — Yin: the horizontal line, the flat earth\n- Human ( | ) — Neutral: the vertical line, the human\n\nYang and Yin:\n- Yang symbolizes positive and active energy, like the Sun. Yang vowels make light and positive sounds. In the diagram, these are the Light Sounds (Yang vowels).\n- Yin symbolizes quieter, darker energy that feels more subtle and distant, like the Moon and the (hidden) Sun during the night. Yin vowels make dark and deeper sounds. In the diagram, these are the Dark Sounds (Yin vowels).\n\nWith the combination of Sky (·), Earth (—), and Human ( | ), the rest of the Korean vowels were born.\n\nSource: screenshots sent 2026-10-28.","chapterId":"essence","id":"e1","kind":"note","known":false,"korean":"훈민정음","meaning":"the proper sound for the instruction of the people","romanization":"Hunminjeongeum","title":"Essence of Hangul"},{"body":"In Hangul, there are 24 basic letters: 10 simple vowels and 14 simple consonants.\n\nSimple vowels (10): ㅏ ㅓ ㅗ ㅜ ㅡ ㅣ ㅑ ㅕ ㅛ ㅠ\nSimple consonants (14): ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅅ ㅇ ㅈ ㅊ ㅋ ㅌ ㅍ ㅎ\n\nThese 10 vowel sounds make the base for the pronunciation of all the syllables in Korean, which are combinations of vowels and consonants. Each Hangul vowel makes a specific sound.\n\nThis chapter meets the first six vowels:\n\n1. ㅏ — a — like the a in father\n2. ㅓ — eo — like the beginning of awesome, without rounding the lips\n3. ㅗ — o — like the o in hole; like saying \"oh!\" when surprised\n4. ㅜ — u — a bit like the oo in oof\n5. ㅡ — eu — mouth wide and flat, teeth together, lips not rounded\n6. ㅣ — i — like the elongated i in ski\n\nStroke order (from the tracing screens):\n- ㅏ: vertical line top to bottom, then a short stroke to the right from the middle.\n- ㅓ: short stroke to the right, then a vertical line top to bottom.\n- ㅗ: short vertical line top to bottom, then a long horizontal line left to right underneath.\n- ㅜ: long horizontal line left to right, then a short vertical line down from the centre.\n- ㅡ: one horizontal line, left to right.\n- ㅣ: one vertical line, top to bottom.\n\nSource: screenshots sent 2026-10-28.","chapterId":"vowels1","id":"e2","kind":"note","known":false,"korean":"ㅏ ㅓ ㅗ ㅜ ㅡ ㅣ","meaning":"The first six of the 10 simple vowels; the base for the pronunciation of all Korean syllables","romanization":"a eo o u eu i","title":"Simple Vowels 1 — The First Six Vowels"},{"body":"Our first vowel is the letter ㅏ. It is pronounced like the a in the word father.\n\nStroke order: 1) vertical line, top to bottom. 2) short stroke to the right from the middle.","chapterId":"vowels1","id":"e3","kind":"vocabulary","known":false,"korean":"ㅏ","meaning":"a sound, like the a in father","romanization":"a","title":"ㅏ (a)"},{"body":"Our next vowel ㅓ is transliterated into English as eo but sounds like the beginning of the word awesome, spoken without rounding the lips. Open the mouth and relax the lips and jaw.\n\nStroke order: 1) short stroke to the right. 2) vertical line, top to bottom.","chapterId":"vowels1","id":"e4","kind":"vocabulary","known":false,"korean":"ㅓ","meaning":"eo sound, like the beginning of awesome without rounding the lips","romanization":"eo","title":"ㅓ (eo)"},{"body":"Our third vowel ㅗ is pronounced like the o in the word hole. It's similar to when we are surprised and say \"oh!\"\n\nStroke order: 1) short vertical line, top to bottom. 2) long horizontal line, left to right, underneath.","chapterId":"vowels1","id":"e5","kind":"vocabulary","known":false,"korean":"ㅗ","meaning":"o sound, like the o in hole","romanization":"o","title":"ㅗ (o)"},{"body":"The fourth vowel ㅜ is transliterated as u but sounds a bit like the oo in oof, like when we see a soccer player get kicked by another player. We round our lips, stick them out a little and push a bit of air through them.\n\nStroke order: 1) long horizontal line, left to right. 2) short vertical line down from the centre.","chapterId":"vowels1","id":"e6","kind":"vocabulary","known":false,"korean":"ㅜ","meaning":"u sound, a bit like the oo in oof","romanization":"u","title":"ㅜ (u)"},{"body":"Our fifth vowel ㅡ is transliterated as eu. To get the sound, first make our mouth and lips wide and flat, keeping the teeth together. Now, without rounding the lips, what sound would we make if we stepped in dog poop?\n\nStroke order: one horizontal line, left to right.","chapterId":"vowels1","id":"e7","kind":"vocabulary","known":false,"korean":"ㅡ","meaning":"eu sound, made with a wide, flat mouth and teeth together, lips not rounded","romanization":"eu","title":"ㅡ (eu)"},{"body":"And now, our sixth simple Korean vowel! It is ㅣ, and is transliterated as i, and sounds like the elongated i in ski!\n\nStroke order: one vertical line, top to bottom.","chapterId":"vowels1","id":"e8","kind":"vocabulary","known":false,"korean":"ㅣ","meaning":"i sound, like the elongated i in ski","romanization":"i","title":"ㅣ (i)"},{"body":"After the first six vowels, here are the final four simple vowels: ㅑ, ㅕ, ㅛ and ㅠ. They look similar to ㅏ, ㅓ, ㅗ and ㅜ, but these vowels begin with a y sound.\n\nAll four begin the same way: start with a short and soft ㅣ, then glide into the base vowel.\n\n1. ㅑ — ya — like the ya in yacht. ㅣ + ㅏ.\n2. ㅕ — yeo — like the sound in young or yummy. ㅣ + ㅓ.\n3. ㅛ — yo — like the yo in yoga. ㅣ + ㅗ.\n4. ㅠ — yu — like the yu in eulogy. ㅣ + ㅜ.\n\nThat completes all 10 simple vowels:\nㅏ ㅓ ㅗ ㅜ ㅡ ㅣ ㅑ ㅕ ㅛ ㅠ\n\nStroke order (from the tracing screens):\n- ㅑ: 1) vertical line, top to bottom. 2) short horizontal stroke to the right (upper). 3) short horizontal stroke to the right (lower).\n- ㅕ: 1) short horizontal stroke, left to right (upper). 2) short horizontal stroke, left to right (lower). 3) vertical line, top to bottom, on the right.\n- ㅛ: 1) short vertical line, top to bottom (left). 2) short vertical line, top to bottom (right). 3) long horizontal line, left to right, underneath.\n- ㅠ: 1) long horizontal line, left to right, on top. 2) short vertical line down (left). 3) short vertical line down (right).\n\nSource: screenshots sent 2026-10-28.","chapterId":"vowels2","id":"e9","kind":"note","known":false,"korean":"ㅑ ㅕ ㅛ ㅠ","meaning":"The final four of the 10 simple vowels; y-sound versions of ㅏ ㅓ ㅗ ㅜ","romanization":"ya yeo yo yu","title":"Simple Vowels 2 — The Final Four Vowels"},{"body":"First up is ㅑ, pronounced like the ya in the word yacht. Start with a short and soft ㅣ and end in ㅏ to make the ㅑ sound.\n\nStroke order: 1) vertical line, top to bottom. 2) short horizontal stroke to the right (upper). 3) short horizontal stroke to the right (lower).","chapterId":"vowels2","id":"e10","kind":"vocabulary","known":false,"korean":"ㅑ","meaning":"ya sound, like the ya in yacht","romanization":"ya","title":"ㅑ (ya)"},{"body":"Next, we have ㅕ, transliterated as yeo. We hear this sound in the words young or yummy. Start with a short and soft ㅣ and end in ㅓ to make the ㅕ sound.\n\nStroke order: 1) short horizontal stroke, left to right (upper). 2) short horizontal stroke, left to right (lower). 3) vertical line, top to bottom, on the right.","chapterId":"vowels2","id":"e11","kind":"vocabulary","known":false,"korean":"ㅕ","meaning":"yeo sound, like the sound in young or yummy","romanization":"yeo","title":"ㅕ (yeo)"},{"body":"The vowel ㅛ is pronounced like yo in the word yoga. It starts with a short and soft ㅣ and ends in ㅗ.\n\nStroke order: 1) short vertical line, top to bottom (left). 2) short vertical line, top to bottom (right). 3) long horizontal line, left to right, underneath.","chapterId":"vowels2","id":"e12","kind":"vocabulary","known":false,"korean":"ㅛ","meaning":"yo sound, like the yo in yoga","romanization":"yo","title":"ㅛ (yo)"},{"body":"Last but not least, our final simple vowel is ㅠ. It is pronounced like yu, like in the English word eulogy. It starts with a short and soft ㅣ and ends in ㅜ.\n\nStroke order: 1) long horizontal line, left to right, on top. 2) short vertical line down (left). 3) short vertical line down (right).","chapterId":"vowels2","id":"e13","kind":"vocabulary","known":false,"korean":"ㅠ","meaning":"yu sound, like the yu in eulogy","romanization":"yu","title":"ㅠ (yu)"}]}
-</script>
+<script id="seed-data" type="application/json">{"chapters":[{"color":"ocean","description":"Sejong the Great and Hunminjeongeum (훈민정음) — the three vowel elements Sky (·), Earth (—), and Human ( | ), and Yang light vowels vs Yin dark vowels.","id":"essence","title":"Essence of Hangul","cover":"palace"},{"color":"coral","description":"The 10 simple vowels and 14 simple consonants make up Hangul's 24 basic letters. This chapter covers the first six simple vowels: ㅏ a, ㅓ eo, ㅗ o, ㅜ u, ㅡ eu, and ㅣ i — their sounds, mouth shapes, and stroke order.","id":"vowels1","title":"Simple Vowels 1","cover":"blossom"},{"color":"sun","description":"The final four simple vowels: ㅑ ya, ㅕ yeo, ㅛ yo, and ㅠ yu. They look like ㅏ ㅓ ㅗ ㅜ, but begin with a y sound — a short, soft ㅣ gliding into the base vowel. Includes their sounds, how to make them, and stroke order.","id":"vowels2","title":"Simple Vowels 2","cover":"seoul"}],"entries":[{"body":"Sejong the Great succeeded in creating what was known in his time as Hunminjeongeum (훈민정음), meaning \"the proper sound for the instruction of the people.\"\n\nModern Hangul includes both vowels and consonants. Vowels start from three basic elements based on the philosophical concept of Yin and Yang:\n\n- Sky (·) — Yang: the dot, the sun in the sky\n- Earth (—) — Yin: the horizontal line, the flat earth\n- Human ( | ) — Neutral: the vertical line, the human\n\nYang and Yin:\n- Yang symbolizes positive and active energy, like the Sun. Yang vowels make light and positive sounds. In the diagram, these are the Light Sounds (Yang vowels).\n- Yin symbolizes quieter, darker energy that feels more subtle and distant, like the Moon and the (hidden) Sun during the night. Yin vowels make dark and deeper sounds. In the diagram, these are the Dark Sounds (Yin vowels).\n\nWith the combination of Sky (·), Earth (—), and Human ( | ), the rest of the Korean vowels were born.\n\nSource: screenshots sent 2026-10-28.","chapterId":"essence","id":"e1","kind":"note","known":false,"korean":"훈민정음","meaning":"the proper sound for the instruction of the people","romanization":"Hunminjeongeum","title":"Essence of Hangul","topic":"Hangul basics"},{"body":"In Hangul, there are 24 basic letters: 10 simple vowels and 14 simple consonants.\n\nSimple vowels (10): ㅏ ㅓ ㅗ ㅜ ㅡ ㅣ ㅑ ㅕ ㅛ ㅠ\nSimple consonants (14): ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅅ ㅇ ㅈ ㅊ ㅋ ㅌ ㅍ ㅎ\n\nThese 10 vowel sounds make the base for the pronunciation of all the syllables in Korean, which are combinations of vowels and consonants. Each Hangul vowel makes a specific sound.\n\nThis chapter meets the first six vowels:\n\n1. ㅏ — a — like the a in father\n2. ㅓ — eo — like the beginning of awesome, without rounding the lips\n3. ㅗ — o — like the o in hole; like saying \"oh!\" when surprised\n4. ㅜ — u — a bit like the oo in oof\n5. ㅡ — eu — mouth wide and flat, teeth together, lips not rounded\n6. ㅣ — i — like the elongated i in ski\n\nStroke order (from the tracing screens):\n- ㅏ: vertical line top to bottom, then a short stroke to the right from the middle.\n- ㅓ: short stroke to the right, then a vertical line top to bottom.\n- ㅗ: short vertical line top to bottom, then a long horizontal line left to right underneath.\n- ㅜ: long horizontal line left to right, then a short vertical line down from the centre.\n- ㅡ: one horizontal line, left to right.\n- ㅣ: one vertical line, top to bottom.\n\nSource: screenshots sent 2026-10-28.","chapterId":"vowels1","id":"e2","kind":"note","known":false,"korean":"ㅏ ㅓ ㅗ ㅜ ㅡ ㅣ","meaning":"The first six of the 10 simple vowels; the base for the pronunciation of all Korean syllables","romanization":"a eo o u eu i","title":"Simple Vowels 1 — The First Six Vowels","topic":"Simple vowels"},{"body":"Our first vowel is the letter ㅏ. It is pronounced like the a in the word father.\n\nStroke order: 1) vertical line, top to bottom. 2) short stroke to the right from the middle.","chapterId":"vowels1","id":"e3","kind":"vocabulary","known":false,"korean":"ㅏ","meaning":"a sound, like the a in father","romanization":"a","title":"ㅏ (a)","topic":"Simple vowels"},{"body":"Our next vowel ㅓ is transliterated into English as eo but sounds like the beginning of the word awesome, spoken without rounding the lips. Open the mouth and relax the lips and jaw.\n\nStroke order: 1) short stroke to the right. 2) vertical line, top to bottom.","chapterId":"vowels1","id":"e4","kind":"vocabulary","known":false,"korean":"ㅓ","meaning":"eo sound, like the beginning of awesome without rounding the lips","romanization":"eo","title":"ㅓ (eo)","topic":"Simple vowels"},{"body":"Our third vowel ㅗ is pronounced like the o in the word hole. It's similar to when we are surprised and say \"oh!\"\n\nStroke order: 1) short vertical line, top to bottom. 2) long horizontal line, left to right, underneath.","chapterId":"vowels1","id":"e5","kind":"vocabulary","known":false,"korean":"ㅗ","meaning":"o sound, like the o in hole","romanization":"o","title":"ㅗ (o)","topic":"Simple vowels"},{"body":"The fourth vowel ㅜ is transliterated as u but sounds a bit like the oo in oof, like when we see a soccer player get kicked by another player. We round our lips, stick them out a little and push a bit of air through them.\n\nStroke order: 1) long horizontal line, left to right. 2) short vertical line down from the centre.","chapterId":"vowels1","id":"e6","kind":"vocabulary","known":false,"korean":"ㅜ","meaning":"u sound, a bit like the oo in oof","romanization":"u","title":"ㅜ (u)","topic":"Simple vowels"},{"body":"Our fifth vowel ㅡ is transliterated as eu. To get the sound, first make our mouth and lips wide and flat, keeping the teeth together. Now, without rounding the lips, what sound would we make if we stepped in dog poop?\n\nStroke order: one horizontal line, left to right.","chapterId":"vowels1","id":"e7","kind":"vocabulary","known":false,"korean":"ㅡ","meaning":"eu sound, made with a wide, flat mouth and teeth together, lips not rounded","romanization":"eu","title":"ㅡ (eu)","topic":"Simple vowels"},{"body":"And now, our sixth simple Korean vowel! It is ㅣ, and is transliterated as i, and sounds like the elongated i in ski!\n\nStroke order: one vertical line, top to bottom.","chapterId":"vowels1","id":"e8","kind":"vocabulary","known":false,"korean":"ㅣ","meaning":"i sound, like the elongated i in ski","romanization":"i","title":"ㅣ (i)","topic":"Simple vowels"},{"body":"After the first six vowels, here are the final four simple vowels: ㅑ, ㅕ, ㅛ and ㅠ. They look similar to ㅏ, ㅓ, ㅗ and ㅜ, but these vowels begin with a y sound.\n\nAll four begin the same way: start with a short and soft ㅣ, then glide into the base vowel.\n\n1. ㅑ — ya — like the ya in yacht. ㅣ + ㅏ.\n2. ㅕ — yeo — like the sound in young or yummy. ㅣ + ㅓ.\n3. ㅛ — yo — like the yo in yoga. ㅣ + ㅗ.\n4. ㅠ — yu — like the yu in eulogy. ㅣ + ㅜ.\n\nThat completes all 10 simple vowels:\nㅏ ㅓ ㅗ ㅜ ㅡ ㅣ ㅑ ㅕ ㅛ ㅠ\n\nStroke order (from the tracing screens):\n- ㅑ: 1) vertical line, top to bottom. 2) short horizontal stroke to the right (upper). 3) short horizontal stroke to the right (lower).\n- ㅕ: 1) short horizontal stroke, left to right (upper). 2) short horizontal stroke, left to right (lower). 3) vertical line, top to bottom, on the right.\n- ㅛ: 1) short vertical line, top to bottom (left). 2) short vertical line, top to bottom (right). 3) long horizontal line, left to right, underneath.\n- ㅠ: 1) long horizontal line, left to right, on top. 2) short vertical line down (left). 3) short vertical line down (right).\n\nSource: screenshots sent 2026-10-28.","chapterId":"vowels2","id":"e9","kind":"note","known":false,"korean":"ㅑ ㅕ ㅛ ㅠ","meaning":"The final four of the 10 simple vowels; y-sound versions of ㅏ ㅓ ㅗ ㅜ","romanization":"ya yeo yo yu","title":"Simple Vowels 2 — The Final Four Vowels","topic":"Simple vowels"},{"body":"First up is ㅑ, pronounced like the ya in the word yacht. Start with a short and soft ㅣ and end in ㅏ to make the ㅑ sound.\n\nStroke order: 1) vertical line, top to bottom. 2) short horizontal stroke to the right (upper). 3) short horizontal stroke to the right (lower).","chapterId":"vowels2","id":"e10","kind":"vocabulary","known":false,"korean":"ㅑ","meaning":"ya sound, like the ya in yacht","romanization":"ya","title":"ㅑ (ya)","topic":"Simple vowels"},{"body":"Next, we have ㅕ, transliterated as yeo. We hear this sound in the words young or yummy. Start with a short and soft ㅣ and end in ㅓ to make the ㅕ sound.\n\nStroke order: 1) short horizontal stroke, left to right (upper). 2) short horizontal stroke, left to right (lower). 3) vertical line, top to bottom, on the right.","chapterId":"vowels2","id":"e11","kind":"vocabulary","known":false,"korean":"ㅕ","meaning":"yeo sound, like the sound in young or yummy","romanization":"yeo","title":"ㅕ (yeo)","topic":"Simple vowels"},{"body":"The vowel ㅛ is pronounced like yo in the word yoga. It starts with a short and soft ㅣ and ends in ㅗ.\n\nStroke order: 1) short vertical line, top to bottom (left). 2) short vertical line, top to bottom (right). 3) long horizontal line, left to right, underneath.","chapterId":"vowels2","id":"e12","kind":"vocabulary","known":false,"korean":"ㅛ","meaning":"yo sound, like the yo in yoga","romanization":"yo","title":"ㅛ (yo)","topic":"Simple vowels"},{"body":"Last but not least, our final simple vowel is ㅠ. It is pronounced like yu, like in the English word eulogy. It starts with a short and soft ㅣ and ends in ㅜ.\n\nStroke order: 1) long horizontal line, left to right, on top. 2) short vertical line down (left). 3) short vertical line down (right).","chapterId":"vowels2","id":"e13","kind":"vocabulary","known":false,"korean":"ㅠ","meaning":"yu sound, like the yu in eulogy","romanization":"yu","title":"ㅠ (yu)","topic":"Simple vowels"}]}</script>
 
 <script>
 (function () {
@@ -125,71 +210,167 @@
   }
   var state = load();
   var filter = 'all';
+  var kindFilter = 'all';
+  var knownOnly = false;
   var query = '';
+  var COVERS = { seoul: { emoji: '🏙️', label: 'Seoul' }, palace: { emoji: '🏯', label: 'Palace' }, blossom: { emoji: '🌸', label: 'Blossom' }, market: { emoji: '🏮', label: 'Market' } };
+  var COLORS = ['ocean', 'coral', 'sun', 'leaf', 'plum', 'teal'];
   function esc(s) { return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function nl(s) { return esc(s).replace(/\n/g, '<br>'); }
   function save() { localStorage.setItem(KEY, JSON.stringify(state)); }
+  function coverOf(c) { return COVERS[c.cover] || COVERS.seoul; }
+  function colorOf(c) { return COLORS.indexOf(c.color) !== -1 ? c.color : 'ocean'; }
+  function chapterEntries(id) { return state.entries.filter(function (e) { return e.chapterId === id; }); }
   function matches(entry) {
+    if (kindFilter !== 'all' && entry.kind !== kindFilter) return false;
+    if (knownOnly && !entry.known) return false;
     if (!query) return true;
-    var hay = (entry.title + ' ' + entry.korean + ' ' + entry.romanization + ' ' + entry.meaning + ' ' + entry.body).toLowerCase();
+    var hay = (entry.title + ' ' + entry.korean + ' ' + entry.romanization + ' ' + entry.meaning + ' ' + (entry.topic || '') + ' ' + entry.body).toLowerCase();
     return hay.indexOf(query) !== -1;
   }
+  function setNav(name) {
+    document.querySelectorAll('.bottomnav [data-nav]').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-nav') === name); });
+  }
+  function openDetail(id) {
+    var entry = state.entries.find(function (e) { return String(e.id) === String(id); });
+    if (!entry) return;
+    var chapter = state.chapters.find(function (c) { return c.id === entry.chapterId; });
+    var el = document.getElementById('sheetContent');
+    el.innerHTML = '<div class="card-banner kind-' + esc(entry.kind) + '">' + esc(entry.kind) + (chapter ? ' · ' + esc(chapter.title) : '') + '</div>'
+      + '<p class="big">' + esc(entry.korean || entry.title) + '</p>'
+      + '<h2>' + esc(entry.title) + '</h2>'
+      + '<p><span class="tag">' + esc(entry.kind) + '</span> ' + (entry.topic ? '<span class="tag topic">' + esc(entry.topic) + '</span>' : '') + '</p>'
+      + (entry.meaning ? '<p><strong>Meaning:</strong> ' + esc(entry.meaning) + '</p>' : '')
+      + (entry.romanization ? '<p><strong>Romanization:</strong> ' + esc(entry.romanization) + '</p>' : '')
+      + '<p>' + nl(entry.body) + '</p>'
+      + '<button type="button" data-sheet-known="' + esc(entry.id) + '">' + (entry.known ? 'Known ✓' : 'Mark known') + '</button>'
+      + '<button type="button" data-sheet-delete="' + esc(entry.id) + '">Delete entry</button>';
+    document.getElementById('sheetBackdrop').classList.remove('hidden');
+    var knownBtn = el.querySelector('[data-sheet-known]');
+    if (knownBtn) knownBtn.addEventListener('click', function () { entry.known = !entry.known; save(); render(); openDetail(entry.id); });
+    var delBtn = el.querySelector('[data-sheet-delete]');
+    if (delBtn) delBtn.addEventListener('click', function () {
+      if (!confirm('Delete this entry from this browser copy?')) return;
+      state.entries = state.entries.filter(function (e) { return String(e.id) !== String(entry.id); });
+      save(); closeDetail(); render();
+    });
+  }
+  function closeDetail() { document.getElementById('sheetBackdrop').classList.add('hidden'); }
+  function renderChapterCards() {
+    var wrap = document.getElementById('chapterCards');
+    if (!wrap) return;
+    wrap.innerHTML = state.chapters.map(function (chapter) {
+      var entries = chapterEntries(chapter.id);
+      var known = entries.filter(function (e) { return e.known; }).length;
+      var pct = entries.length ? Math.round(known / entries.length * 100) : 0;
+      var cov = coverOf(chapter);
+      return '<div class="chapter-card' + (filter === chapter.id ? ' active' : '') + '" data-open-chapter="' + esc(chapter.id) + '" role="button" tabindex="0">'
+        + '<div class="cover cover-' + esc(chapter.cover || 'seoul') + '"><span aria-hidden="true">' + cov.emoji + '</span><span class="cover-label">' + cov.label + '</span></div>'
+        + '<div class="card-body"><h3>' + esc(chapter.title) + '</h3>'
+        + '<p class="desc">' + esc(chapter.description || '') + '</p>'
+        + '<div class="meta">' + entries.length + ' entries · ' + known + ' known</div>'
+        + '<div class="progress"><i style="width:' + pct + '%"></i></div></div></div>';
+    }).join('');
+    wrap.querySelectorAll('[data-open-chapter]').forEach(function (btn) {
+      btn.addEventListener('click', function () { filter = btn.getAttribute('data-open-chapter'); render(); document.getElementById('app').scrollIntoView({ behavior: 'smooth' }); });
+    });
+  }
   function render() {
-    var app = document.getElementById('app');
-    var known = state.entries.filter(function (e) { return e.known; }).length;
-    document.getElementById('counts').textContent = state.chapters.length + ' chapters · ' + state.entries.length + ' entries · ' + known + ' known';
+    var knownTotal = state.entries.filter(function (e) { return e.known; }).length;
+    document.getElementById('counts').textContent = state.chapters.length + ' chapters · ' + state.entries.length + ' entries · ' + knownTotal + ' known';
+    document.getElementById('countsTop').textContent = state.chapters.length + ' chapters';
+    document.getElementById('statProgress').textContent = knownTotal + ' known · ' + (state.entries.length ? Math.round(knownTotal / state.entries.length * 100) : 0) + '%';
     var chapterSelect = document.getElementById('entryChapter');
     chapterSelect.innerHTML = state.chapters.map(function (c) { return '<option value="' + esc(c.id) + '">' + esc(c.title) + '</option>'; }).join('');
+    renderChapterCards();
+    var app = document.getElementById('app');
     var html = '';
     var shown = 0;
     state.chapters.forEach(function (chapter) {
       if (filter !== 'all' && filter !== chapter.id) return;
       var entries = state.entries.filter(function (e) { return e.chapterId === chapter.id && matches(e); });
-      if (filter === 'all' && query && entries.length === 0) return;
+      if (filter === 'all' && (query || kindFilter !== 'all' || knownOnly) && entries.length === 0) return;
       shown += entries.length;
-      html += '<section class="chapter ' + esc(chapter.color) + '"><h2>' + esc(chapter.title) + '</h2><p class="desc">' + esc(chapter.description || '') + '</p>';
+      var allInChapter = chapterEntries(chapter.id);
+      var knownInChapter = allInChapter.filter(function (e) { return e.known; }).length;
+      var pct = allInChapter.length ? Math.round(knownInChapter / allInChapter.length * 100) : 0;
+      var cov = coverOf(chapter);
+      html += '<section class="chapter"><div class="chapter-banner banner-' + colorOf(chapter) + '"><div class="coverline" aria-hidden="true">' + cov.emoji + '</div><h2>' + esc(chapter.title) + '</h2><p class="desc">' + esc(chapter.description || '') + '</p><p style="margin:8px 0 0;font-weight:700">' + allInChapter.length + ' entries · ' + knownInChapter + ' known · ' + pct + '%</p></div>';
       var cardsHtml = '';
+      var notesHtml = '';
       entries.forEach(function (entry) {
+        var preview = entry.body && entry.body.length > 180 ? entry.body.slice(0, 180) + '…' : (entry.body || '');
+        var inner = '<p><span class="tag">' + esc(entry.kind) + '</span> ' + (entry.topic ? '<span class="tag topic">' + esc(entry.topic) + '</span>' : '') + '</p>'
+          + (entry.meaning ? '<p>' + esc(entry.meaning) + '</p>' : '')
+          + (entry.romanization ? '<p><strong>Romanization:</strong> ' + esc(entry.romanization) + '</p>' : '')
+          + (preview ? '<p>' + nl(preview) + '</p>' : '')
+          + '<p style="font-weight:700">Tap to read the full entry →</p>'
+          + '<button type="button" data-known="' + esc(entry.id) + '">' + (entry.known ? 'Known ✓' : 'Mark known') + '</button> <button type="button" data-delete="' + esc(entry.id) + '">Delete entry</button>';
         if (entry.kind === 'note') {
-          html += '<div class="note"><h3>' + esc(entry.title) + '</h3>';
-          if (entry.korean) html += '<p><strong>Korean:</strong> ' + esc(entry.korean) + ' &nbsp; <strong>Romanization:</strong> ' + esc(entry.romanization) + '</p>';
-          if (entry.meaning) html += '<p><strong>Meaning:</strong> ' + esc(entry.meaning) + '</p>';
-          html += '<p>' + esc(entry.body) + '</p>';
-          html += '<button type="button" data-known="' + esc(entry.id) + '">' + (entry.known ? 'Known ✓' : 'Mark known') + '</button> <button type="button" data-delete="' + esc(entry.id) + '">Delete entry</button></div>';
+          notesHtml += '<div class="note" data-detail="' + esc(entry.id) + '"><div class="card-banner kind-note">📝 Note</div><div class="pad"><h3>' + esc(entry.title) + '</h3>'
+            + (entry.korean ? '<p><strong>Korean:</strong> ' + esc(entry.korean) + ' &nbsp; <strong>Romanization:</strong> ' + esc(entry.romanization) + '</p>' : '')
+            + (entry.meaning ? '<p><strong>Meaning:</strong> ' + esc(entry.meaning) + '</p>' : '')
+            + '<p>' + nl(preview) + '</p><p style="font-weight:700">Tap to read the full note →</p>'
+            + '<button type="button" data-known="' + esc(entry.id) + '">' + (entry.known ? 'Known ✓' : 'Mark known') + '</button> <button type="button" data-delete="' + esc(entry.id) + '">Delete entry</button></div></div>';
         } else {
-          cardsHtml += '<article class="card' + (entry.known ? ' is-known' : '') + '"><p class="big">' + esc(entry.korean || entry.title) + '</p><h3>' + esc(entry.title) + '</h3><p><span class="tag">' + esc(entry.kind) + '</span></p>';
-          if (entry.meaning) cardsHtml += '<p>' + esc(entry.meaning) + '</p>';
-          if (entry.romanization) cardsHtml += '<p><strong>Romanization:</strong> ' + esc(entry.romanization) + '</p>';
-          cardsHtml += '<p>' + esc(entry.body) + '</p>';
-          cardsHtml += '<button type="button" data-known="' + esc(entry.id) + '">' + (entry.known ? 'Known ✓' : 'Mark known') + '</button> <button type="button" data-delete="' + esc(entry.id) + '">Delete entry</button></article>';
+          cardsHtml += '<article class="card' + (entry.known ? ' is-known' : '') + '" data-detail="' + esc(entry.id) + '"><div class="card-banner kind-' + esc(entry.kind) + '">' + esc(entry.kind) + '</div><div class="pad"><p class="big">' + esc(entry.korean || entry.title) + '</p><h3>' + esc(entry.title) + '</h3>' + inner + '</div></article>';
         }
       });
       if (cardsHtml) html += '<div class="cards">' + cardsHtml + '</div>';
+      if (notesHtml) html += notesHtml;
       if (entries.length === 0) html += '<p>No entries match in this chapter.</p>';
       html += '</section>';
     });
     if (shown === 0) html += '<div class="empty"><p>No entries match your search yet. Try a different search, or add a new entry below.</p></div>';
     app.innerHTML = html;
     app.querySelectorAll('[data-known]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var entry = state.entries.find(function (e) { return e.id === btn.getAttribute('data-known'); });
+      btn.addEventListener('click', function (ev) {
+        ev.stopPropagation();
+        var entry = state.entries.find(function (e) { return String(e.id) === String(btn.getAttribute('data-known')); });
         if (entry) { entry.known = !entry.known; save(); render(); }
       });
     });
     app.querySelectorAll('[data-delete]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
+      btn.addEventListener('click', function (ev) {
+        ev.stopPropagation();
         if (!confirm('Delete this entry from this browser copy?')) return;
-        state.entries = state.entries.filter(function (e) { return e.id !== btn.getAttribute('data-delete'); });
+        state.entries = state.entries.filter(function (e) { return String(e.id) !== String(btn.getAttribute('data-delete')); });
         save(); render();
       });
     });
-    document.querySelectorAll('.toolbar [data-filter]').forEach(function (btn) {
+    app.querySelectorAll('[data-detail]').forEach(function (el) {
+      el.addEventListener('click', function () { openDetail(el.getAttribute('data-detail')); });
+    });
+    document.querySelectorAll('#chapterFilters [data-filter]').forEach(function (btn) {
       btn.classList.toggle('active', btn.getAttribute('data-filter') === filter);
     });
+    document.querySelectorAll('#kindFilters [data-kind]').forEach(function (btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-kind') === kindFilter);
+    });
+    var kt = document.getElementById('knownToggle');
+    if (kt) kt.classList.toggle('active', knownOnly);
   }
-  document.querySelectorAll('.toolbar [data-filter]').forEach(function (btn) {
+  document.querySelectorAll('#chapterFilters [data-filter]').forEach(function (btn) {
     btn.addEventListener('click', function () { filter = btn.getAttribute('data-filter'); render(); });
   });
+  document.querySelectorAll('#kindFilters [data-kind]').forEach(function (btn) {
+    btn.addEventListener('click', function () { kindFilter = btn.getAttribute('data-kind'); render(); });
+  });
+  var knownToggle = document.getElementById('knownToggle');
+  if (knownToggle) knownToggle.addEventListener('click', function () { knownOnly = !knownOnly; render(); });
   document.getElementById('search').addEventListener('input', function (e) { query = e.target.value.toLowerCase(); render(); });
+  document.getElementById('sheetClose').addEventListener('click', closeDetail);
+  document.getElementById('sheetBackdrop').addEventListener('click', function (e) { if (e.target === this) closeDetail(); });
+  document.querySelectorAll('.bottomnav [data-nav]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var nav = btn.getAttribute('data-nav');
+      setNav(nav);
+      if (nav === 'home') { filter = 'all'; kindFilter = 'all'; knownOnly = false; query = ''; document.getElementById('search').value = ''; render(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+      if (nav === 'chapters') { document.getElementById('chaptersSection').scrollIntoView({ behavior: 'smooth' }); }
+      if (nav === 'add') { document.querySelector('.forms').scrollIntoView({ behavior: 'smooth' }); var t = document.getElementById('entryTitle'); if (t) t.focus({ preventScroll: true }); }
+      if (nav === 'known') { knownOnly = true; render(); document.getElementById('app').scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
   document.getElementById('addEntryForm').addEventListener('submit', function (e) {
     e.preventDefault();
     var entry = {
@@ -201,6 +382,7 @@
       romanization: document.getElementById('entryRoman').value.trim(),
       meaning: document.getElementById('entryMeaning').value.trim(),
       body: document.getElementById('entryBody').value.trim(),
+      topic: '',
       known: false
     };
     if (!entry.title) return;
@@ -213,12 +395,13 @@
     var title = document.getElementById('chapterTitle').value.trim();
     if (!title) return;
     var id = 'chapter-' + Date.now();
-    state.chapters.push({ id: id, title: title, color: document.getElementById('chapterColor').value, description: document.getElementById('chapterDesc').value.trim() });
+    var coverEl = document.getElementById('chapterCover');
+    state.chapters.push({ id: id, title: title, color: document.getElementById('chapterColor').value, cover: coverEl ? coverEl.value : 'seoul', description: document.getElementById('chapterDesc').value.trim() });
     save();
     var btn = document.createElement('button');
-    btn.type = 'button'; btn.setAttribute('data-filter', id); btn.textContent = title;
+    btn.type = 'button'; btn.className = 'chip'; btn.setAttribute('data-filter', id); btn.textContent = title;
     btn.addEventListener('click', function () { filter = id; render(); });
-    document.querySelector('.toolbar').insertBefore(btn, document.getElementById('search'));
+    document.getElementById('chapterFilters').appendChild(btn);
     render(); e.target.reset();
     alert('Chapter saved in this browser.');
   });
@@ -232,11 +415,24 @@
     if (!confirm('Reset this browser copy back to the snapshot chapters and entries? Your added entries in this browser will be removed.')) return;
     localStorage.removeItem(KEY);
     state = JSON.parse(JSON.stringify(seed));
-    filter = 'all'; query = ''; document.getElementById('search').value = '';
+    filter = 'all'; kindFilter = 'all'; knownOnly = false; query = ''; document.getElementById('search').value = '';
     render();
   });
   render();
 })();
 </script>
+
+<nav class="bottomnav" aria-label="Notebook navigation">
+  <button type="button" data-nav="home" class="active"><span class="ico">🏠</span><span>Home</span></button>
+  <button type="button" data-nav="chapters"><span class="ico">📚</span><span>Chapters</span></button>
+  <button type="button" data-nav="add"><span class="ico">➕</span><span>Add</span></button>
+  <button type="button" data-nav="known"><span class="ico">✅</span><span>Known</span></button>
+</nav>
+<div id="sheetBackdrop" class="sheet-backdrop hidden">
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="Entry details">
+    <button type="button" class="sheet-close" id="sheetClose">✕ Close</button>
+    <div id="sheetContent"></div>
+  </div>
+</div>
 </body>
 </html>
