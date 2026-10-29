@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Korean Study Notebook</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #222; background: linear-gradient(180deg, #fff3c4 0%, #ffe3ec 35%, #dbeafe 70%, #dcfce7 100%); }
+  header { padding: 36px 20px 24px; text-align: center; background: linear-gradient(90deg, #ff6b6b, #ff9f1c, #2a9d8f, #4361ee); color: white; }
+  header h1 { margin: 0 0 8px; font-size: 2.4rem; }
+  header p { margin: 4px 0; font-size: 1.05rem; }
+  .sun-moon { font-size: 2rem; letter-spacing: .4em; }
+  nav { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 18px 16px 4px; }
+  nav button { border: 0; border-radius: 999px; padding: 10px 18px; font-size: 1rem; font-weight: 700; cursor: pointer; background: white; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+  nav button.active { background: #222; color: white; }
+  main { max-width: 900px; margin: 0 auto; padding: 12px 16px 40px; }
+  .chapter { border-radius: 20px; padding: 22px; margin: 22px 0; background: white; box-shadow: 0 6px 24px rgba(0,0,0,.12); border-top: 12px solid #999; }
+  .chapter.ocean { border-top-color: #2a7fff; }
+  .chapter.coral { border-top-color: #ff6b6b; }
+  .chapter.sun { border-top-color: #ffb703; }
+  .chapter h2 { margin-top: 0; font-size: 1.7rem; }
+  .chapter .desc { color: #444; line-height: 1.5; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 18px; }
+  .card { border-radius: 16px; padding: 18px; background: #fff8e1; border: 3px solid #ffd166; }
+  .card.blue { background: #e3f2fd; border-color: #64b5f6; }
+  .card.pink { background: #fce4ec; border-color: #f48fb1; }
+  .card.green { background: #e8f5e9; border-color: #81c784; }
+  .card .big { font-size: 3.2rem; line-height: 1; margin: 0; }
+  .card h3 { margin: 10px 0 6px; font-size: 1.25rem; }
+  .card p { margin: 6px 0; line-height: 1.5; }
+  .tag { display: inline-block; background: #222; color: white; border-radius: 999px; padding: 3px 10px; font-size: .8rem; }
+  .known { background: #fff; border: 2px solid #222; border-radius: 999px; padding: 6px 12px; cursor: pointer; font-weight: 700; margin-top: 10px; }
+  .card.is-known { outline: 4px solid #22c55e; }
+  .note { background: #fffde7; border-left: 8px solid #ffb703; padding: 16px 18px; border-radius: 12px; line-height: 1.6; }
+  .note h3 { margin-top: 0; }
+  footer { text-align: center; padding: 0 16px 36px; color: #444; }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<header>
+  <div class="sun-moon" aria-hidden="true">☀️ 🌙</div>
+  <h1>Korean Study Notebook</h1>
+  <p>한국어 공부 — colorful chapters, one per side chat</p>
+  <p>3 chapters · 13 entries · Snapshot from 2026-10-28</p>
+</header>
+
+<nav aria-label="Filter chapters">
+  <button class="active" data-filter="all">All chapters</button>
+  <button data-filter="essence">Essence of Hangul</button>
+  <button data-filter="vowels1">Simple Vowels 1</button>
+  <button data-filter="vowels2">Simple Vowels 2</button>
+</nav>
+
+<main>
+  <section class="chapter ocean" data-chapter="essence">
+    <h2>🌊 Essence of Hangul</h2>
+    <p class="desc">Sejong the Great and Hunminjeongeum (훈민정음) — the three vowel elements Sky (·), Earth (—), and Human ( | ), and Yang light vowels vs Yin dark vowels.</p>
+    <div class="note">
+      <h3>Essence of Hangul — 훈민정음 (Hunminjeongeum)</h3>
+      <p><strong>Meaning:</strong> the proper sound for the instruction of the people</p>
+      <p>Sejong the Great succeeded in creating what was known in his time as Hunminjeongeum (훈민정음), meaning “the proper sound for the instruction of the people.”</p>
+      <p>Modern Hangul includes both vowels and consonants. Vowels start from three basic elements based on the philosophical concept of Yin and Yang:</p>
+      <ul>
+        <li><strong>Sky (·)</strong> — Yang: the dot, the sun in the sky</li>
+        <li><strong>Earth (—)</strong> — Yin: the horizontal line, the flat earth</li>
+        <li><strong>Human ( | )</strong> — Neutral: the vertical line, the human</li>
+      </ul>
+      <p><strong>Yang</strong> symbolizes positive and active energy, like the Sun. Yang vowels make light and positive sounds. In the diagram, these are the Light Sounds (Yang vowels).</p>
+      <p><strong>Yin</strong> symbolizes quieter, darker energy that feels more subtle and distant, like the Moon and the (hidden) Sun during the night. Yin vowels make dark and deeper sounds. In the diagram, these are the Dark Sounds (Yin vowels).</p>
+      <p>With the combination of Sky (·), Earth (—), and Human ( | ), the rest of the Korean vowels were born.</p>
+      <p>Source: screenshots sent 2026-10-28.</p>
+    </div>
+  </section>
+
+  <section class="chapter coral" data-chapter="vowels1">
+    <h2>🌸 Simple Vowels 1</h2>
+    <p class="desc">The 10 simple vowels and 14 simple consonants make up Hangul's 24 basic letters. This chapter covers the first six simple vowels: ㅏ a, ㅓ eo, ㅗ o, ㅜ u, ㅡ eu, and ㅣ i — their sounds, mouth shapes, and stroke order.</p>
+    <div class="note">
+      <h3>Simple Vowels 1 — The First Six Vowels</h3>
+      <p><strong>Korean:</strong> ㅏ ㅓ ㅗ ㅜ ㅡ ㅣ &nbsp; <strong>Romanization:</strong> a eo o u eu i</p>
+      <p>In Hangul, there are 24 basic letters: 10 simple vowels and 14 simple consonants.</p>
+      <p>Simple vowels (10): ㅏ ㅓ ㅗ ㅜ ㅡ ㅣ ㅑ ㅕ ㅛ ㅠ<br>Simple consonants (14): ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅅ ㅇ ㅈ ㅊ ㅋ ㅌ ㅍ ㅎ</p>
+      <p>These 10 vowel sounds make the base for the pronunciation of all the syllables in Korean, which are combinations of vowels and consonants. Each Hangul vowel makes a specific sound.</p>
+      <p>This chapter meets the first six vowels: ㅏ a (like the a in father), ㅓ eo (like the beginning of awesome, without rounding the lips), ㅗ o (like the o in hole), ㅜ u (a bit like the oo in oof), ㅡ eu (mouth wide and flat, teeth together, lips not rounded), and ㅣ i (like the elongated i in ski).</p>
+      <p>Stroke order: ㅏ — vertical line top to bottom, then a short stroke to the right from the middle. ㅓ — short stroke to the right, then a vertical line top to bottom. ㅗ — short vertical line top to bottom, then a long horizontal line left to right underneath. ㅜ — long horizontal line left to right, then a short vertical line down from the centre. ㅡ — one horizontal line, left to right. ㅣ — one vertical line, top to bottom.</p>
+      <p>Source: screenshots sent 2026-10-28.</p>
+    </div>
+    <div class="cards">
+      <article class="card"><p class="big">ㅏ</p><h3>ㅏ (a)</h3><p><span class="tag">vocabulary</span></p><p>a sound, like the a in father.</p><p>Our first vowel is the letter ㅏ. It is pronounced like the a in the word father.</p><p>Stroke order: 1) vertical line, top to bottom. 2) short stroke to the right from the middle.</p><button class="known" type="button">Mark known</button></article>
+      <article class="card blue"><p class="big">ㅓ</p><h3>ㅓ (eo)</h3><p><span class="tag">vocabulary</span></p><p>eo sound, like the beginning of awesome without rounding the lips.</p><p>Our next vowel ㅓ is transliterated into English as eo but sounds like the beginning of the word awesome, spoken without rounding the lips. Open the mouth and relax the lips and jaw.</p><p>Stroke order: 1) short stroke to the right. 2) vertical line, top to bottom.</p><button class="known" type="button">Mark known</button></article>
+      <article class="card pink"><p class="big">ㅗ</p><h3>ㅗ (o)</h3><p><span class="tag">vocabulary</span></p><p>o sound, like the o in hole.</p><p>Our third vowel ㅗ is pronounced like the o in the word hole. It is similar to when we are surprised and say “oh!”</p><p>Stroke order: 1) short vertical line, top to bottom. 2) long horizontal line, left to right, underneath.</p><button class="known" type="button">Mark known</button></article>
+      <article class="card green"><p class="big">ㅜ</p><h3>ㅜ (u)</h3><p><span class="tag">vocabulary</span></p><p>u sound, a bit like the oo in oof.</p><p>The fourth vowel ㅜ is transliterated as u but sounds a bit like the oo in oof, like when we see a soccer player get kicked by another player. We round our lips, stick them out a little and push a bit of air through them.</p><p>Stroke order: 1) long horizontal line, left to right. 2) short vertical line down from the centre.</p><button class="known" type="button">Mark known</button></article>
+      <article class="card"><p class="big">ㅡ</p><h3>ㅡ (eu)</h3><p><span class="tag">vocabulary</span></p><p>eu sound, made with a wide, flat mouth and teeth together, lips not rounded.</p><p>Our fifth vowel ㅡ is transliterated as eu. To get the sound, first make our mouth and lips wide and flat, keeping the teeth together. Now, without rounding the lips, what sound would we make if we stepped in dog poop?</p><p>Stroke order: one horizontal line, left to right.</p><button class="known" type="button">Mark known</button></article>
+      <article class="card blue"><p class="big">ㅣ</p><h3>ㅣ (i)</h3><p><span class="tag">vocabulary</span></p><p>i sound, like the elongated i in ski.</p><p>And now, our sixth simple Korean vowel! It is ㅣ, and is transliterated as i, and sounds like the elongated i in ski!</p><p>Stroke order: one vertical line, top to bottom.</p><button class="known" type="button">Mark known</button></article>
+    </div>
+  </section>
+
+  <section class="chapter sun" data-chapter="vowels2">
+    <h2>☀️ Simple Vowels 2</h2>
+    <p class="desc">The final four simple vowels: ㅑ ya, ㅕ yeo, ㅛ yo, and ㅠ yu. They look like ㅏ ㅓ ㅗ ㅜ, but begin with a y sound — a short, soft ㅣ gliding into the base vowel. Includes their sounds, how to make them, and stroke order.</p>
+    <div class="note">
+      <h3>Simple Vowels 2 — The Final Four Vowels</h3>
+      <p><strong>Korean:</strong> ㅑ ㅕ ㅛ ㅠ &nbsp; <strong>Romanization:</strong> ya yeo yo yu</p>
+      <p>After the first six vowels, here are the final four simple vowels: ㅑ, ㅕ, ㅛ and ㅠ. They look similar to ㅏ, ㅓ, ㅗ and ㅜ, but these vowels begin with a y sound.</p>
+      <p>All four begin the same way: start with a short and soft ㅣ, then glide into the base vowel. 1) ㅑ — ya — like the ya in yacht. ㅣ + ㅏ. 2) ㅕ — yeo — like the sound in young or yummy. ㅣ + ㅓ. 3) ㅛ — yo — like the yo in yoga. ㅣ + ㅗ. 4) ㅠ — yu — like the yu in eulogy. ㅣ + ㅜ.</p>
+      <p>That completes all 10 simple vowels: ㅏ ㅓ ㅗ ㅜ ㅡ ㅣ ㅑ ㅕ ㅛ ㅠ</p>
+      <p>Stroke order: ㅑ — 1) vertical line, top to bottom. 2) short horizontal stroke to the right (upper). 3) short horizontal stroke to the right (lower). ㅕ — 1) short horizontal stroke, left to right (upper). 2) short horizontal stroke, left to right (lower). 3) vertical line, top to bottom, on the right. ㅛ — 1) short vertical line, top to bottom (left). 2) short vertical line, top to bottom (right). 3) long horizontal line, left to right, underneath. ㅠ — 1) long horizontal line, left to right, on top. 2) short vertical line down (left). 3) short vertical line down (right).</p>
+      <p>Source: screenshots sent 2026-10-28.</p>
+    </div>
+    <div class="cards">
+      <article class="card"><p class="big">ㅑ</p><h3>ㅑ (ya)</h3><p><span class="tag">vocabulary</span></p><p>ya sound, like the ya in yacht.</p><p>First up is ㅑ, pronounced like the ya in the word yacht. Start with a short and soft ㅣ and end in ㅏ to make the ㅑ sound.</p><p>Stroke order: 1) vertical line, top to bottom. 2) short horizontal stroke to the right (upper). 3) short horizontal stroke to the right (lower).</p><button class="known" type="button">Mark known</button></article>
+      <article class="card blue"><p class="big">ㅕ</p><h3>ㅕ (yeo)</h3><p><span class="tag">vocabulary</span></p><p>yeo sound, like the sound in young or yummy.</p><p>Next, we have ㅕ, transliterated as yeo. We hear this sound in the words young or yummy. Start with a short and soft ㅣ and end in ㅓ to make the ㅕ sound.</p><p>Stroke order: 1) short horizontal stroke, left to right (upper). 2) short horizontal stroke, left to right (lower). 3) vertical line, top to bottom, on the right.</p><button class="known" type="button">Mark known</button></article>
+      <article class="card pink"><p class="big">ㅛ</p><h3>ㅛ (yo)</h3><p><span class="tag">vocabulary</span></p><p>yo sound, like the yo in yoga.</p><p>The vowel ㅛ is pronounced like yo in the word yoga. It starts with a short and soft ㅣ and ends in ㅗ.</p><p>Stroke order: 1) short vertical line, top to bottom (left). 2) short vertical line, top to bottom (right). 3) long horizontal line, left to right, underneath.</p><button class="known" type="button">Mark known</button></article>
+      <article class="card green"><p class="big">ㅠ</p><h3>ㅠ (yu)</h3><p><span class="tag">vocabulary</span></p><p>yu sound, like the yu in eulogy.</p><p>Last but not least, our final simple vowel is ㅠ. It is pronounced like yu, like in the English word eulogy. It starts with a short and soft ㅣ and ends in ㅜ.</p><p>Stroke order: 1) long horizontal line, left to right, on top. 2) short vertical line down (left). 3) short vertical line down (right).</p><button class="known" type="button">Mark known</button></article>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Static snapshot from the live Korean Study Notebook in Muse. New chapters need a new snapshot to appear here.</p>
+</footer>
+
+<script>
+  var buttons = document.querySelectorAll('nav button');
+  buttons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      buttons.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var filter = btn.getAttribute('data-filter');
+      document.querySelectorAll('.chapter').forEach(function (section) {
+        section.classList.toggle('hidden', filter !== 'all' && section.getAttribute('data-chapter') !== filter);
+      });
+    });
+  });
+  document.querySelectorAll('.known').forEach(function (btn, i) {
+    var key = 'korean-known-' + i;
+    var card = btn.closest('.card');
+    if (localStorage.getItem(key) === '1') { card.classList.add('is-known'); btn.textContent = 'Known ✓'; }
+    btn.addEventListener('click', function () {
+      var known = card.classList.toggle('is-known');
+      localStorage.setItem(key, known ? '1' : '0');
+      btn.textContent = known ? 'Known ✓' : 'Mark known';
+    });
+  });
+</script>
+</body>
+</html>
